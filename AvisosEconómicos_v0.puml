@@ -1,0 +1,46 @@
+@startuml y1
+	hide circle
+	skin rose
+	hide empty members
+
+	entity PedidoPublicación {
+		*id : INTEGER
+		nombre_cliente : TEXT
+		fecha_contratación : DATETIME
+	}
+
+	entity AvisoEconómico {
+		*id : INTEGER
+		id_pedido_publicación : INTEGER
+		fecha_publicación : DATE
+		contenido : TEXT
+		archivo : VARCHAR
+	}
+
+	'Categoría
+	entity ÁreaPublicación {
+		*id : INTEGER
+		denominación : VARCHAR
+	}
+
+	entity ÁreasAnuncio {
+		*id_aviso_económico : INTEGER
+		*id_área_publicación : INTEGER
+		estado : BOOLEAN
+	}
+
+	entity CobroPorPublicación {
+		*id : INTEGER
+		id_pedido_publicación : INTEGER UNIQUE
+		id_pago : INTEGER
+		fecha_pago : DATETIME
+		abono : INTEGER
+		descuento : INTEGER
+	}
+
+	PedidoPublicación ||-d-|{ AvisoEconómico
+	AvisoEconómico ||-r-|{ ÁreasAnuncio 
+	ÁreasAnuncio }o-d-|| ÁreaPublicación
+	PedidoPublicación ||-r-o{ CobroPorPublicación
+	
+@enduml
