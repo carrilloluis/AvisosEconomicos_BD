@@ -40,8 +40,8 @@ CREATE TABLE IF NOT EXISTS [Área de Publicación]
 DROP TABLE IF EXISTS [Áreas Por Anuncio];
 CREATE TABLE IF NOT EXISTS [Áreas Por Anuncio]
 (
-	[id del aviso económico] INTEGER UNSIGNED NOT NULL, -- int4
-	[id del área de publicación] INTEGER UNSIGNED NOT NULL,
+	[id del aviso económico] INTEGER UNSIGNED NOT NULL REFERENCES [Aviso Económico](id), -- int4
+	[id del área de publicación] INTEGER UNSIGNED NOT NULL REFERENCES [Área de Publicación](id),
 	[estado] CHAR(1) NOT NULL DEFAULT '1', -- Boolean
 	PRIMARY KEY('id del aviso económico', 'id del área de publicación')
 ) WITHOUT RowId;
